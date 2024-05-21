@@ -39,8 +39,6 @@ async def user_input(db,user_question):
 
 def main():
 
-    index_placeholder = None
-    st.set_page_config(page_title = "Chat with your PDF using  ollama")
     st.header('Chat with your PDF using ollama by llama3')
     
     if "conversation" not in st.session_state:
@@ -82,20 +80,14 @@ def main():
         if prompt := st.chat_input("Ask your question from the PDF?"):
             with st.chat_message("user", avatar = '👨🏻'):
                 st.markdown(prompt)
-            st.session_state.messages.append({"role": "user", 
-                                              "avatar" :'👨🏻',
-                                              "content": prompt})
+            st.session_state.messages.append({"role": "user", "avatar" :'👨🏻',"content": prompt})
 
-
-            print(st.session_state.messages)
             vector_store = st.session_state.vector_store
             pdf_response=asyncio.run(user_input(vector_store,prompt))
             cleaned_response=pdf_response["output_text"]
             with st.chat_message("assistant", avatar='🤖'):
                 st.markdown(cleaned_response)
-            st.session_state.messages.append({"role": "assistant", 
-                                              "avatar" :'🤖',
-                                              "content": cleaned_response})
+            st.session_state.messages.append({"role": "assistant", "avatar" :'🤖',"content": cleaned_response})
         else:
             st.markdown('Upload your PDFs to chat')
 
