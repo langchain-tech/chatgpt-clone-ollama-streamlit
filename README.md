@@ -59,7 +59,6 @@ pip install -r requirements.txt
 **4. Set Up Environment Variables**
 Create a .env file in the root directory of your project and add the required environment variables. For example:
 ```
-GOOGLE_API_KEY=your_gemini_api_key
 LANGCHAIN_API_KEY=your_langchain_api_key
 LANGCHAIN_PROJECT=your_project_name
 ```
