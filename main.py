@@ -16,6 +16,8 @@ load_dotenv()
 
 os.environ["LANGCHAIN_TRACING_V2"]="true"
 os.environ["LANGCHAIN_API_KEY"]=os.getenv("LANGCHAIN_API_KEY")
+os.environ["GOOGLE_API_KEY"]=os.getenv("GOOGLE_API_KEY")
+
 
 async def get_conversational_answer(retriever,input,chat_history):
     contextualize_q_system_prompt = """Given a chat history and the latest user question \
