@@ -61,7 +61,7 @@ Create a .env file in the root directory of your project and add the required en
 ```
 GOOGLE_API_KEY=your_gemini_api_key
 LANGCHAIN_API_KEY=your_langchain_api_key
-OLLAMA_API_KEY=your_ollama_api_key
+LANGCHAIN_PROJECT=your_project_name
 ```
 
 
@@ -69,7 +69,7 @@ OLLAMA_API_KEY=your_ollama_api_key
 
 Run the application using Streamlit:
 ```
-streamlit run gemini_2.py
+streamlit run main.py
 ```
 ## Usage
 
