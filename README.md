@@ -69,7 +69,7 @@ LANGCHAIN_PROJECT=your_project_name
 
 Run the application using Streamlit:
 ```
-streamlit run main.py
+streamlit run app.py
 ```
 ## Usage
 

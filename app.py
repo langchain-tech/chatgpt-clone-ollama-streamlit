@@ -1,8 +1,8 @@
 import streamlit as st
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_community.chat_models import ChatOllama
+from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_community.vectorstores import FAISS
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate,MessagesPlaceholder
@@ -16,8 +16,6 @@ load_dotenv()
 
 os.environ["LANGCHAIN_TRACING_V2"]="true"
 os.environ["LANGCHAIN_API_KEY"]=os.getenv("LANGCHAIN_API_KEY")
-os.environ["GOOGLE_API_KEY"]=os.getenv("GOOGLE_API_KEY")
-
 
 async def get_conversational_answer(retriever,input,chat_history):
     contextualize_q_system_prompt = """Given a chat history and the latest user question \
@@ -33,7 +31,7 @@ async def get_conversational_answer(retriever,input,chat_history):
     )
 
 
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro-latest",temperature=0.3)
+    llm = ChatOllama(model="llama3")
 
     history_aware_retriever = create_history_aware_retriever(
         llm, retriever, contextualize_q_prompt
@@ -76,8 +74,7 @@ def main():
         with st.chat_message(message["role"], avatar = message['avatar']):
             st.markdown(message["content"])
 
-    #embed_model = OllamaEmbeddings(model='mxbai-embed-large')
-    embed_model = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
+    embed_model = OllamaEmbeddings(model='mxbai-embed-large')
 
     with st.sidebar:
         st.subheader('Upload Your PDF File')
